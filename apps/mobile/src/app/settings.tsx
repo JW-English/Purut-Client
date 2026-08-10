@@ -1,5 +1,6 @@
 import Constants from 'expo-constants';
 import { useRouter } from 'expo-router';
+import * as WebBrowser from 'expo-web-browser';
 import { useState } from 'react';
 import { Alert, Pressable, ScrollView, StyleSheet, Switch, View } from 'react-native';
 
@@ -12,6 +13,21 @@ import {
   useLearningSettings,
 } from '@/features/settings/use-learning-settings';
 import { useTheme } from '@/hooks/use-theme';
+
+/**
+ * 약관 문서는 웹에 있다. 스토어 심사가 이 URL 을 직접 열어보므로 앱 안에만 두면 안 된다.
+ *
+ * 주소를 따로 상수로 박지 않고 API 주소에서 뽑는다. 개발 서버를 보고 있을 때
+ * 운영 약관이 열리면 어느 환경인지 헷갈린다.
+ */
+async function openLegal(doc: 'terms' | 'privacy') {
+  const base = (process.env.EXPO_PUBLIC_LEGAL_URL ?? '').replace(/\/$/, '');
+  if (!base) {
+    Alert.alert('준비 중', '아직 링크가 등록되지 않았어요.');
+    return;
+  }
+  await WebBrowser.openBrowserAsync(`${base}/legal/${doc}`);
+}
 
 /**
  * 설정.
@@ -107,14 +123,8 @@ export default function SettingsScreen() {
             onPress={() => router.push('/listening/downloads')}
           />
           <Row label="버전" value={Constants.expoConfig?.version ?? '—'} />
-          <Row
-            label="이용약관"
-            onPress={() => Alert.alert('준비 중', '아직 링크가 등록되지 않았어요.')}
-          />
-          <Row
-            label="개인정보처리방침"
-            onPress={() => Alert.alert('준비 중', '아직 링크가 등록되지 않았어요.')}
-          />
+          <Row label="이용약관" onPress={() => openLegal('terms')} />
+          <Row label="개인정보처리방침" onPress={() => openLegal('privacy')} />
         </Section>
 
         <View style={styles.dangerZone}>
