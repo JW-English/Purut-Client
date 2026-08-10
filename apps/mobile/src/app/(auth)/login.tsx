@@ -41,7 +41,7 @@ export default function LoginScreen() {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
           <View style={styles.header}>
-            <ThemedText type="title">정운영어</ThemedText>
+            <ThemedText type="title">푸릇푸릇</ThemedText>
             <ThemedText type="small" themeColor="textSecondary">
               로그인하고 오늘의 학습을 시작하세요
             </ThemedText>

@@ -7,7 +7,7 @@
  * 오히려 확인이 어렵다.
  */
 export const BUSINESS = {
-  name: '',             // 상호 (예: 정운영어)
+  name: '',             // 상호 (예: 푸릇푸릇영어)
   representative: '',   // 대표자 성명
   registration: '',     // 사업자등록번호
   address: '',          // 사업장 주소

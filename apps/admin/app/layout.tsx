@@ -4,7 +4,7 @@ import './globals.css';
 import { Providers } from './providers';
 
 export const metadata: Metadata = {
-  title: '정운영어 관리자',
+  title: '푸릇푸릇 관리자',
   description: '숙제 관리 · 첨삭',
 };
 

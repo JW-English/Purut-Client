@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "정운영어",
-    "slug": "jungwoon",
+    "name": "푸릇푸릇",
+    "slug": "purutpurut",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "jungwoon",
+    "scheme": "purutpurut",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon",
-      "bundleIdentifier": "com.jungwoon.app",
+      "bundleIdentifier": "com.purutpurut",
       "supportsTablet": false,
       "infoPlist": {
         "UIBackgroundModes": [
@@ -19,7 +19,7 @@
       "buildNumber": "1"
     },
     "android": {
-      "package": "com.jungwoon.app",
+      "package": "com.purutpurut",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",

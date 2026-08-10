@@ -15,8 +15,8 @@
       "distribution": "internal",
       "channel": "preview",
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://api.example.com",
-        "EXPO_PUBLIC_LEGAL_URL": "https://example.com"
+        "EXPO_PUBLIC_API_URL": "https://api.purutpurut.com",
+        "EXPO_PUBLIC_LEGAL_URL": "https://purutpurut.com"
       },
       "android": { "buildType": "apk" },
       "ios": { "simulator": false }
@@ -26,8 +26,8 @@
       "channel": "production",
       "autoIncrement": true,
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://api.example.com",
-        "EXPO_PUBLIC_LEGAL_URL": "https://example.com"
+        "EXPO_PUBLIC_API_URL": "https://api.purutpurut.com",
+        "EXPO_PUBLIC_LEGAL_URL": "https://purutpurut.com"
       },
       "android": { "buildType": "app-bundle" }
     }

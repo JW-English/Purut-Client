@@ -24,7 +24,7 @@ export default function HomeScreen() {
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.topBar}>
           <ThemedText type="smallBold" style={styles.appName}>
-            정운영어
+            푸릇푸릇
           </ThemedText>
           <View style={styles.topActions}>
             <Pressable

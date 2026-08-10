@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { BUSINESS, EFFECTIVE_DATE, Placeholder } from '../business';
 
 export const metadata: Metadata = {
-  title: '개인정보처리방침 · 정운영어',
+  title: '개인정보처리방침 · 푸릇푸릇',
   robots: { index: true, follow: true },
 };
 

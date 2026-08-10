@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { BUSINESS, EFFECTIVE_DATE, Placeholder } from '../business';
 
 export const metadata: Metadata = {
-  title: '이용약관 · 정운영어',
+  title: '이용약관 · 푸릇푸릇',
   robots: { index: true, follow: true },
 };
 
@@ -16,7 +16,7 @@ export default function TermsPage() {
       <h2>제1조 (목적)</h2>
       <p>
         이 약관은 <Placeholder v={BUSINESS.name} />
-        (이하 &ldquo;회사&rdquo;)이 제공하는 영어 학습 애플리케이션 &ldquo;정운영어&rdquo;(이하
+        (이하 &ldquo;회사&rdquo;)이 제공하는 영어 학습 애플리케이션 &ldquo;푸릇푸릇&rdquo;(이하
         &ldquo;서비스&rdquo;)의 이용 조건과 절차, 회사와 이용자의 권리·의무를 정함을 목적으로 합니다.
       </p>
 
