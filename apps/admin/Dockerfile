@@ -44,7 +44,8 @@ COPY --from=build --chown=app:app /app/apps/admin/public ./apps/admin/public
 USER app
 EXPOSE 3000
 
+# localhost 를 쓰면 alpine 이 ::1 로 먼저 풀어서 실패한다 — 서버는 0.0.0.0(IPv4)에만 붙는다
 HEALTHCHECK --interval=30s --timeout=3s --start-period=20s --retries=3 \
-    CMD wget -qO- http://localhost:3000/legal/privacy > /dev/null || exit 1
+    CMD wget -qO- http://127.0.0.1:3000/legal/privacy > /dev/null || exit 1
 
 CMD ["node", "apps/admin/server.js"]
