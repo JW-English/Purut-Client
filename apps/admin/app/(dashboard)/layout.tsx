@@ -36,7 +36,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <div className="min-h-screen">
       <header className="border-b border-neutral-200 bg-white">
         <div className="mx-auto flex max-w-5xl items-center gap-6 px-6 py-3">
-          <span className="font-semibold">정운영어 관리자</span>
+          <span className="font-semibold">푸릇푸릇 관리자</span>
 
           <nav className="flex gap-1">
             {NAV.map((item) => (

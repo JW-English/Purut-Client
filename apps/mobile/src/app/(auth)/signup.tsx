@@ -52,7 +52,7 @@ export default function SignUpScreen() {
           <View style={styles.header}>
             <ThemedText type="title">회원가입</ThemedText>
             <ThemedText type="small" themeColor="textSecondary">
-              정운영어 학습을 시작하려면 계정을 만들어 주세요
+              푸릇푸릇 학습을 시작하려면 계정을 만들어 주세요
             </ThemedText>
           </View>
 

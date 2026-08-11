@@ -37,7 +37,7 @@ export default function LoginPage() {
         onSubmit={handleSubmit}
         className="w-full max-w-sm space-y-5 rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm">
         <div className="space-y-1">
-          <h1 className="text-xl font-semibold">정운영어 관리자</h1>
+          <h1 className="text-xl font-semibold">푸릇푸릇 관리자</h1>
           <p className="text-sm text-neutral-500">선생님 계정으로 로그인해 주세요</p>
         </div>
 

@@ -1,0 +1,93 @@
+name: Admin Deploy
+
+# 관리자 페이지는 백엔드와 다른 레포에 있어서 이미지도 여기서 만든다.
+# 서버의 compose 는 두 이미지를 각각 태그로 참조한다.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/admin/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/admin-deploy.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: admin-deploy
+  cancel-in-progress: false
+
+env:
+  IMAGE: ghcr.io/${{ github.repository_owner }}/jungwoon-admin
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      # 타입 오류가 있는 채로 이미지를 만들면 런타임에 터진다
+      - run: npm run typecheck --workspace=admin
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build & push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/admin/Dockerfile
+          push: true
+          # NEXT_PUBLIC_* 는 번들에 박히므로 런타임이 아니라 빌드 시점에 넣어야 한다
+          build-args: NEXT_PUBLIC_API_URL=https://api.purutpurut.com
+          tags: |
+            ${{ env.IMAGE }}:${{ github.sha }}
+            ${{ env.IMAGE }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script_stop: true
+          script: |
+            set -euo pipefail
+            cd /opt/purutpurut/deploy
+
+            PREV=$(grep '^ADMIN_TAG=' .env | cut -d= -f2)
+            sed -i "s|^ADMIN_TAG=.*|ADMIN_TAG=${{ github.sha }}|" .env
+            docker compose -f docker-compose.prod.yml --env-file .env pull admin
+            docker compose -f docker-compose.prod.yml --env-file .env up -d admin
+
+            for i in $(seq 1 20); do
+              if curl -fsS http://localhost:3000/legal/privacy >/dev/null 2>&1 \
+                 || docker exec jungwoon-admin wget -qO- http://localhost:3000/legal/privacy >/dev/null 2>&1; then
+                echo "✅ admin 배포 완료 ${{ github.sha }}"
+                exit 0
+              fi
+              sleep 3
+            done
+
+            echo "❌ 헬스체크 실패 — ${PREV} 로 되돌립니다"
+            docker compose -f docker-compose.prod.yml --env-file .env logs --tail=50 admin
+            sed -i "s|^ADMIN_TAG=.*|ADMIN_TAG=${PREV}|" .env
+            docker compose -f docker-compose.prod.yml --env-file .env up -d admin
+            exit 1

@@ -106,7 +106,7 @@ function RootNavigator() {
 
   return (
     <Stack>
-      <Stack.Screen name="index" options={{ title: '정운영어' }} />
+      <Stack.Screen name="index" options={{ title: '푸릇푸릇' }} />
       <Stack.Screen name="(auth)/login" options={{ headerShown: false }} />
       <Stack.Screen name="(auth)/signup" options={{ title: '회원가입' }} />
       <Stack.Screen name="onboarding" options={{ title: '프로필 설정', headerBackVisible: false }} />
