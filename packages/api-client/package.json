@@ -1,5 +1,5 @@
 {
-  "name": "@jungwoon/api-client",
+  "name": "@purut/api-client",
   "version": "0.0.1",
   "private": true,
   "types": "./src/index.ts",

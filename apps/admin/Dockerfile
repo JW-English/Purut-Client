@@ -1,5 +1,5 @@
 # 모노레포 루트에서 빌드한다:
-#   docker build -f apps/admin/Dockerfile -t jungwoon-admin .
+#   docker build -f apps/admin/Dockerfile -t purut-admin .
 #
 # NEXT_PUBLIC_* 는 빌드 시점에 번들에 박힌다. 런타임 환경변수로는 안 바뀌므로
 # 빌드 인자로 받는다.
