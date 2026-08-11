@@ -88,9 +88,10 @@ jobs:
             docker compose -f docker-compose.prod.yml --env-file .env pull admin
             docker compose -f docker-compose.prod.yml --env-file .env up -d admin
 
+            # admin 은 포트를 호스트에 열지 않는다 (Caddy 만 노출). VM 에서
+            # curl localhost:3000 은 항상 실패하므로 컨테이너 안에서 확인한다
             for i in $(seq 1 20); do
-              if curl -fsS http://localhost:3000/legal/privacy >/dev/null 2>&1 \
-                 || docker exec jungwoon-admin wget -qO- http://localhost:3000/legal/privacy >/dev/null 2>&1; then
+              if docker exec jungwoon-admin wget -qO- http://127.0.0.1:3000/legal/privacy >/dev/null 2>&1; then
                 echo "✅ admin 배포 완료 ${{ github.sha }}"
                 exit 0
               fi

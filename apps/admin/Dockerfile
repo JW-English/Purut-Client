@@ -29,6 +29,10 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
+# standalone 서버는 HOSTNAME 에 바인딩하는데 Docker 가 이걸 컨테이너 ID 로
+# 채워버린다. 그러면 컨테이너 안에서도 localhost:3000 으로 못 붙어서
+# 헬스체크와 Caddy 프록시가 모두 실패한다
+ENV HOSTNAME=0.0.0.0
 
 RUN addgroup -S app && adduser -S app -G app
 
