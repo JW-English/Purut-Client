@@ -1,4 +1,4 @@
-# jungwoon-client
+# purut-client
 
 정운영어 클라이언트 모노레포 (npm workspaces).
 서버는 **별도 저장소**다 — `JW-English/backend` (Spring Boot).
@@ -32,7 +32,7 @@ LAN IP** 를 넣어야 한다.
 두 저장소를 잇는 계약은 서버의 **OpenAPI 스펙**이다. 서버(`backend`)를 띄운 상태에서:
 
 ```bash
-npm run generate --workspace=@jungwoon/api-client
+npm run generate --workspace=@purut/api-client
 ```
 
 `packages/api-client/src/schema.d.ts` 는 생성물이지만 커밋한다. 서버 API 가 바뀌면 재생성 →

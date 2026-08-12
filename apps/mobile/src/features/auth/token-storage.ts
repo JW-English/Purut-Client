@@ -8,8 +8,8 @@ import { Platform } from 'react-native';
  * 웹은 SecureStore 를 지원하지 않아 localStorage 로 대체하는데, 이건 개발 확인용이며
  * 실제 서비스는 앱이다. (웹 관리자는 별도로 httpOnly 쿠키 방식을 쓴다)
  */
-const ACCESS_KEY = 'jungwoon.accessToken';
-const REFRESH_KEY = 'jungwoon.refreshToken';
+const ACCESS_KEY = 'purut.accessToken';
+const REFRESH_KEY = 'purut.refreshToken';
 
 const isWeb = Platform.OS === 'web';
 
