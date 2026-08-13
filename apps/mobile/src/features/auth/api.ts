@@ -29,6 +29,27 @@ export function login(body: { email: string; password: string }) {
   return apiFetch<TokenResponse>('/api/auth/login', { method: 'POST', body });
 }
 
+export type SocialProvider = 'KAKAO' | 'GOOGLE' | 'APPLE';
+
+/**
+ * 소셜 로그인. 첫 로그인이 곧 회원가입이다.
+ *
+ * @param credential 각 사 SDK 로 받은 토큰. 카카오는 access_token,
+ *                   구글·Apple 은 id_token 이다. 서버가 직접 검증한다
+ * @param displayName Apple 최초 로그인에서만 보낸다. Apple 은 이름을 딱 한 번만
+ *                    주기 때문이다. 서버는 표시 이름의 기본값으로만 쓴다
+ */
+export function loginWithSocial(
+  provider: SocialProvider,
+  credential: string,
+  displayName?: string,
+) {
+  return apiFetch<TokenResponse>(`/api/auth/oauth/${provider}`, {
+    method: 'POST',
+    body: { accessToken: credential, displayName },
+  });
+}
+
 export function refreshTokens(refreshToken: string) {
   return apiFetch<TokenResponse>('/api/auth/refresh', {
     method: 'POST',
