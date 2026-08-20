@@ -1,6 +1,6 @@
 import { apiFetch } from '@/lib/api';
 
-export type VocabLevel = 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED';
+export type VocabLevel = 'GRADE_1' | 'GRADE_2' | 'GRADE_3';
 
 export type TokenResponse = {
   accessToken: string;
